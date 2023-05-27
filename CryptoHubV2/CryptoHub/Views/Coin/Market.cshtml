@@ -1,0 +1,41 @@
+﻿@model List<CoinGecko.Entities.Response.Coins.CoinMarkets>;
+
+@{
+    ViewData["Title"] = "Market";
+}
+
+<button type="button" class="btn btn-warning btn-floating btn-lg rounded-circle" id="btn-back-to-top">
+    &#x2191;
+</button>
+
+<div class="jumbotron text-center">
+    <h1 class="display-4">Market</h1>
+    <p class="lead">Cryptocurrency data live.</p>
+    <hr />
+</div>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Coin</th>
+            <th scope="col">Price</th>
+            <th class="text-success" scope="col">High 24h</th>
+            <th class="text-danger" scope="col">Low 24h</th>
+            <th scope="col">Market Cap</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var coin in Model)
+        {
+            <tr>
+                <th scope="row">@Html.DisplayName(coin.MarketCapRank.ToString())</th>
+                <td><img src="@coin.Image" style="height: 30px; width: 30px;"> <strong>@Html.DisplayName(coin.Name)</strong> (@Html.DisplayName(coin.Symbol.ToUpper()))</td>
+                <td>$@Html.DisplayName(coin.CurrentPrice.ToString())</td>
+                <td>$@Html.DisplayName(coin.High24H.ToString())</td>
+                <td>$@Html.DisplayName(coin.Low24H.ToString())</td>
+                <td>$@Html.DisplayName(coin.MarketCap.ToString())</td>
+            </tr>
+        }
+    </tbody>
+</table>

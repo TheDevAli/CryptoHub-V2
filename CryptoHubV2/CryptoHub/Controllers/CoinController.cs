@@ -32,10 +32,19 @@ public class CoinController : Controller
         return View(res);
     }
 
+    // Trending coins /Coin/Trending
     public async Task<IActionResult> Trending()
     {
         var res = await _service.GetTrendingCoinsListAsync();
 
         return View("TrendingCoins", res);
+    }
+
+    // Live Market --- /Coin/Market
+    public async Task<IActionResult> Market()
+    {
+        var res = await _service.GetMarketDataAsync();
+
+        return View("Market", res);
     }
 }

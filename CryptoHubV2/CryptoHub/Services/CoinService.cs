@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using CryptoHub.Models;
 using CoinGecko.Entities.Response.Simple;
 using CoinGecko.Entities.Response.Search;
+using CoinGecko.Interfaces;
 
 namespace CryptoHub.Services;
 
@@ -32,5 +33,24 @@ public class CoinService
     public async Task<TrendingList> GetTrendingCoinsListAsync()
     {
         return await _client.SearchClient.GetSearchTrending();
+    }
+
+    //Live Market
+    public async Task<IReadOnlyList<CoinList>> GetCoinListAsync() // not using this yet but works 
+    {
+        return await _client.CoinsClient.GetCoinList();
+    }
+
+    public async Task<List<CoinMarkets>> GetMarketDataAsync()
+    {
+        //Create an instance of System.Net.HttpClient and add our request header
+        HttpClient hClient = new HttpClient();
+        hClient.DefaultRequestHeaders.Add("User-Agent", "CryptoHub");
+
+        //Pass our HttpClient instance to the CoinCecko client
+        ICoinGeckoClient cgClient = new CoinGeckoClient(hClient);
+
+        return await cgClient.CoinsClient.GetCoinMarkets("usd");
+        
     }
 }
