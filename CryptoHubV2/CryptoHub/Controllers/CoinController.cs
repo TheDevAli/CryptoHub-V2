@@ -47,4 +47,32 @@ public class CoinController : Controller
 
         return View("Market", res);
     }
+
+    // Search coin /Coin/Search
+    public async Task<IActionResult> Search()
+    {
+        var res = await _service.GetCoinListAsync();
+
+        return View("Search", res);
+    }
+
+    // Search Coin /Coin/Coindata
+    public async Task<IActionResult> CoinData(string id)
+    {
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            return NotFound();
+        }
+
+        var res = await _service.GetCoinDataByIdAsync(id);
+
+        if (res == null)
+        {
+            return NotFound();
+        }
+
+        return View("CoinData", res);
+        
+    }
+
 }

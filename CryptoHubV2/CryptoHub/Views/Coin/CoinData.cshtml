@@ -1,0 +1,60 @@
+﻿@using System.Globalization;
+@model CoinGecko.Entities.Response.Coins.CoinFullDataById
+
+@{
+    ViewData["Title"] = "CoinData";
+}
+
+<div class="jumbotron text-center">
+    <h1 class="display-4">@Html.DisplayName(Model.Name) Data</h1>
+    <p class="lead">Last Updated: @Html.DisplayName(Model.MarketData.LastUpdated.Value.ToString("f", CultureInfo.CreateSpecificCulture("en-US"))) (GMT)</p>
+    <hr />
+</div>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Coin</th>
+            <th scope="col">Price</th>
+            <th scope="col">High 24h</th>
+            <th scope="col">Low 24h</th>
+            <th scope="col">24h %</th>
+            <th scope="col">7d %</th>
+            <th scope="col">30d %</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">@Html.DisplayFor(model => model.MarketCapRank)</th>
+            <td><strong>@Html.DisplayName(Model.Name)</strong> (@Html.DisplayName(Model.Symbol.ToUpper()))</td>
+            <td>$@Html.DisplayName(Model.MarketData.CurrentPrice.GetValueOrDefault("usd").ToString())</td>
+            <td>$@Html.DisplayName(Model.MarketData.High24H.GetValueOrDefault("usd").ToString())</td>
+            <td>$@Html.DisplayName(Model.MarketData.Low24H.GetValueOrDefault("usd").ToString())</td>
+            <td>@Html.DisplayFor(model => model.MarketData.PriceChangePercentage24H)</td>
+            <td>@Html.DisplayFor(model => model.MarketData.PriceChangePercentage7D)</td>
+            <td>@Html.DisplayFor(model => model.MarketData.PriceChangePercentage30D)</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Market Cap</th>
+            <th scope="col">Change (24h)</th>
+            <th scope="col">Change % (24h)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">$@Html.DisplayName(Model.MarketData.MarketCap.GetValueOrDefault("usd").ToString())</th>
+            <td>$@Html.DisplayFor(model => model.MarketData.MarketCapChange24H)</td>
+            <td>@Html.DisplayFor(model => model.MarketData.MarketCapChangePercentage24H)</td>
+        </tr>
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Search" role="button" class="btn btn-warning">Back to Coin Search</a>
+</div>

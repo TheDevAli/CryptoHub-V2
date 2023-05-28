@@ -24,11 +24,6 @@ public class CoinService
         return await _client.SimpleClient.GetSimplePrice(new[] { id }, new[] { currency });
     }
 
-    public async Task<CoinFullDataById> GetCoinDataByIdAsync(string id)
-    {        
-        return await _client.CoinsClient.GetAllCoinDataWithId(id);
-    }
-
     //Trending coins
     public async Task<TrendingList> GetTrendingCoinsListAsync()
     {
@@ -36,11 +31,6 @@ public class CoinService
     }
 
     //Live Market
-    public async Task<IReadOnlyList<CoinList>> GetCoinListAsync() // not using this yet but works 
-    {
-        return await _client.CoinsClient.GetCoinList();
-    }
-
     public async Task<List<CoinMarkets>> GetMarketDataAsync()
     {
         //Create an instance of System.Net.HttpClient and add our request header
@@ -51,6 +41,16 @@ public class CoinService
         ICoinGeckoClient cgClient = new CoinGeckoClient(hClient);
 
         return await cgClient.CoinsClient.GetCoinMarkets("usd");
-        
+    }
+
+    // Search for coin
+    public async Task<IReadOnlyList<CoinList>> GetCoinListAsync() // not using this yet but works 
+    {
+        return await _client.CoinsClient.GetCoinList();
+    }
+
+    public async Task<CoinFullDataById> GetCoinDataByIdAsync(string id)
+    {
+        return await _client.CoinsClient.GetAllCoinDataWithId(id);
     }
 }
