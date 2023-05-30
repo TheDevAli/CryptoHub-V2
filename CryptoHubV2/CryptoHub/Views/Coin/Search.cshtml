@@ -4,7 +4,19 @@
     ViewData["Title"] = "Search";
 }
 
-<h1>Search</h1>
+<div class="jumbotron text-center">
+    <h1 class="display-4">Coin Search</h1>
+    <p class="lead">Search for details of cryptocurrency.</p>
+    <hr />
+</div>
+
+<form asp-controller="Coin" asp-action="Search" asp-route-id="" class="border-dark mb-3" id="filter-form">
+    <div class="d-flex mb-3">
+        <label for="coin-filter-search" class="col-sm-1 col-form-label">Coin:</label>
+        <input type="text" id="coin-filter-search" />
+    </div>
+    <button type="submit" class="btn btn-dark">Search</button>
+</form>
 
 <div class="container" style="max-height: 50vh; overflow-y: scroll;">
     <table class="table table-hover">
@@ -14,10 +26,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var coin in Model)
+            @foreach (var coin in Model) //foreach may throw too many requests as so many coins
             {
                 <tr>
-                    <td><a asp-controller="Coin" asp-action="CoinData">@Html.DisplayName(coin.Name)</a></td>
+                    <td><a asp-controller="Coin" asp-action="CoinData" asp-route-id="@coin.Id">@Html.DisplayName(coin.Name)</a></td>
                 </tr>
             }
         </tbody>

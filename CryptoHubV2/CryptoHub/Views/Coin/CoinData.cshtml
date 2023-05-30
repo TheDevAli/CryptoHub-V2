@@ -6,55 +6,220 @@
 }
 
 <div class="jumbotron text-center">
-    <h1 class="display-4">@Html.DisplayName(Model.Name) Data</h1>
+    <h1 class="display-4">@Html.DisplayName(Model.Name) (@Html.DisplayName(Model.Symbol.ToUpper()))</h1>
     <p class="lead">Last Updated: @Html.DisplayName(Model.MarketData.LastUpdated.Value.ToString("f", CultureInfo.CreateSpecificCulture("en-US"))) (GMT)</p>
     <hr />
 </div>
 
-<table class="table table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Rank</th>
-            <th scope="col">Coin</th>
-            <th scope="col">Price</th>
-            <th scope="col">High 24h</th>
-            <th scope="col">Low 24h</th>
-            <th scope="col">24h %</th>
-            <th scope="col">7d %</th>
-            <th scope="col">30d %</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">@Html.DisplayFor(model => model.MarketCapRank)</th>
-            <td><strong>@Html.DisplayName(Model.Name)</strong> (@Html.DisplayName(Model.Symbol.ToUpper()))</td>
-            <td>$@Html.DisplayName(Model.MarketData.CurrentPrice.GetValueOrDefault("usd").ToString())</td>
-            <td>$@Html.DisplayName(Model.MarketData.High24H.GetValueOrDefault("usd").ToString())</td>
-            <td>$@Html.DisplayName(Model.MarketData.Low24H.GetValueOrDefault("usd").ToString())</td>
-            <td>@Html.DisplayFor(model => model.MarketData.PriceChangePercentage24H)</td>
-            <td>@Html.DisplayFor(model => model.MarketData.PriceChangePercentage7D)</td>
-            <td>@Html.DisplayFor(model => model.MarketData.PriceChangePercentage30D)</td>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card mb-3 data-card">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-pencil primary font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            <h3>@Html.DisplayFor(model => model.MarketCapRank)</h3>
+                            <span>Market Rank</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card mb-3 data-card">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-speech warning font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            <h3>$@Html.DisplayName(Model.MarketData.CurrentPrice.GetValueOrDefault("usd").ToString())</h3>
+                            <span>Current Price</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card mb-3 data-card">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-speech warning font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            <h3>$@Html.DisplayName(Model.MarketData.High24H.GetValueOrDefault("usd").ToString())</h3>
+                            <span>High 24h</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card mb-3 data-card">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-speech warning font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            <h3>$@Html.DisplayName(Model.MarketData.Low24H.GetValueOrDefault("usd").ToString())</h3>
+                            <span>Low 24h</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card mb-3 data-card">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-speech warning font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            @if (Model.MarketData.PriceChangePercentage24H < 0)
+                            {
+                                <h3 class="text-danger">@Html.DisplayFor(model => model.MarketData.PriceChangePercentage24H)</h3>
 
-<table class="table table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Market Cap</th>
-            <th scope="col">Change (24h)</th>
-            <th scope="col">Change % (24h)</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">$@Html.DisplayName(Model.MarketData.MarketCap.GetValueOrDefault("usd").ToString())</th>
-            <td>$@Html.DisplayFor(model => model.MarketData.MarketCapChange24H)</td>
-            <td>@Html.DisplayFor(model => model.MarketData.MarketCapChangePercentage24H)</td>
-        </tr>
-    </tbody>
-</table>
+                            }
+                            else
+                            {
+                                <h3 class="text-success">@Html.DisplayFor(model => model.MarketData.PriceChangePercentage24H)</h3>
+
+                            }
+                            <span>24h %</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card mb-3 data-card">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-speech warning font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            @if (Decimal.Parse(Model.MarketData.PriceChangePercentage7D) < 0)
+                            {
+                                <h3 class="text-danger">@Html.DisplayFor(model => model.MarketData.PriceChangePercentage7D)</h3>
+
+                            }
+                            else
+                            {
+                                <h3 class="text-success">@Html.DisplayFor(model => model.MarketData.PriceChangePercentage7D)</h3>
+
+                            }                            
+                            <span>7d %</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card mb-3 data-card">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-speech warning font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            @if (Decimal.Parse(Model.MarketData.PriceChangePercentage30D) < 0)
+                            {
+                                <h3 class="text-danger">@Html.DisplayFor(model => model.MarketData.PriceChangePercentage30D)</h3>
+
+                            }
+                            else
+                            {
+                                <h3 class="text-success">@Html.DisplayFor(model => model.MarketData.PriceChangePercentage30D)</h3>
+
+                            }
+                            <span>30d %</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card mb-3 data-card">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-speech warning font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            <h3>$@Html.DisplayName(Model.MarketData.MarketCap.GetValueOrDefault("usd").ToString())</h3>
+                            <span>Market Cap</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card mb-3 data-card">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-speech warning font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            <h3>$@Html.DisplayName(Model.MarketData.MarketCapChange24HInCurrency.GetValueOrDefault("usd").ToString())</h3>
+                            <span>Market Cap Change (24h)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card mb-3 data-card">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-speech warning font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            @if (Model.MarketData.MarketCapChangePercentage24H < 0)
+                            {
+                                <h3 class="text-danger">@Html.DisplayFor(model => model.MarketData.MarketCapChangePercentage24H)</h3>
+
+                            }
+                            else
+                            {
+                                <h3 class="text-success">@Html.DisplayFor(model => model.MarketData.MarketCapChangePercentage24H)</h3>
+
+                            }
+                            <span>Market Cap Change (24h %)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div>
-    <a asp-action="Search" role="button" class="btn btn-warning">Back to Coin Search</a>
+    <a asp-action="Search" role="button" class="btn btn-dark">Back to Coin Search</a>
 </div>
