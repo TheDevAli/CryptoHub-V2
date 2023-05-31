@@ -5,6 +5,7 @@ using CryptoHub.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.IdentityModel.Tokens;
 
 namespace CryptoHub.Controllers;
@@ -60,7 +61,8 @@ public class CoinController : Controller
             return View("Search", res);
         }
 
-        res = res.Where(r => r.Name == searchString).ToList().AsReadOnly();
+        res = res.Where(r => r.Name.ToLower().Contains(searchString.ToLower())).ToList().AsReadOnly();
+
         return View("Search", res);
     }
 

@@ -1,7 +1,8 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
-// Write your JavaScript code.
+//To-top-button
+
 //Get the button
 let mybutton = document.getElementById("btn-back-to-top");
 
@@ -27,3 +28,15 @@ function backToTop() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
+
+/* not working
+//Search page asp-route-id dynamic
+let form = document.getElementById("filter-form");
+let value = document.getElementById("coin-filter-search").innerHTML;
+
+form.addEventListener("click", ev => {
+    ev.preventDefault();
+
+    let url = this.Attr("asp-route-id");
+    url = url.replace("dummy", value);
+}) */

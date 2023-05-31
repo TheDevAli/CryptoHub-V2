@@ -1,4 +1,4 @@
-﻿@model IReadOnlyList<CoinGecko.Entities.Response.Coins.CoinList>
+﻿@model IReadOnlyList<CoinGecko.Entities.Response.Coins.CoinList>;
 
 @{
     ViewData["Title"] = "Search";
@@ -10,12 +10,14 @@
     <hr />
 </div>
 
-<form asp-controller="Coin" asp-action="Search" asp-route-id="" class="border-dark mb-3" id="filter-form">
-    <div class="d-flex mb-3">
-        <label for="coin-filter-search" class="col-sm-1 col-form-label">Coin:</label>
-        <input type="text" id="coin-filter-search" />
-    </div>
-    <button type="submit" class="btn btn-dark">Search</button>
+<form asp-controller="Coin" asp-action="Search" method="get">
+    <p>
+        <label for="search-input">Name: </label>
+        <input type="text" id="search-input" name="SearchString" placeholder="bitcoin" />
+    </p>
+    <p>
+        <input type="submit" role="button" class="btn btn-dark" value="Search" />
+    </p>
 </form>
 
 <div class="container" style="max-height: 50vh; overflow-y: scroll;">

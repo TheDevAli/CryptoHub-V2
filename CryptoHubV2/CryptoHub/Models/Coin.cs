@@ -1,4 +1,6 @@
-﻿namespace CryptoHub.Models
+﻿using CoinGecko.Entities.Response.Coins;
+
+namespace CryptoHub.Models
 {
     public class Coin
     {
@@ -6,8 +8,5 @@
         public string Name { get; set; }
 
         public string Symbol { get; set; }
-
-        public decimal Price { get; set; } = 0;
-
     }
 }
