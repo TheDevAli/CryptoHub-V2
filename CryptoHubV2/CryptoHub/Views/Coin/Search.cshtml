@@ -10,30 +10,25 @@
     <hr />
 </div>
 
-<form asp-controller="Coin" asp-action="Search" method="get">
-    <p>
-        <label for="search-input">Name: </label>
-        <input type="text" id="search-input" name="SearchString" placeholder="bitcoin" />
-    </p>
-    <p>
-        <input type="submit" role="button" class="btn btn-dark" value="Search" />
-    </p>
-</form>
+<div class="container d-flex justify-content-center mt-2">
+    <form asp-controller="Coin" asp-action="Search" method="get">
+        <div class="container d-flex justify-content-center flex-column gap-2">
+            <input type="text" id="search-input" name="SearchString" placeholder="Search for a coin..." />
+            <input type="submit" role="button" class="btn btn-dark" value="Search" />
+        </div>
+    </form>
+</div>
 
-<div class="container" style="max-height: 50vh; overflow-y: scroll;">
-    <table class="table table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Coin</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var coin in Model) //foreach may throw too many requests as so many coins
-            {
-                <tr>
-                    <td><a asp-controller="Coin" asp-action="CoinData" asp-route-id="@coin.Id">@Html.DisplayName(coin.Name)</a></td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="container mt-2" style="max-height: 45vh; overflow-y: scroll; width: max-content;">
+    <ul class="list-group">
+        @foreach (var coin in Model)
+        {
+            <a class="text-dark" style="text-decoration: none;" asp-controller="Coin" asp-action="CoinData" asp-route-id="@coin.Id">
+            <li class="list-group-item list-coin">
+                    @Html.DisplayName(coin.Name)
+                <span class="badge bg-dark rounded-pill">(@coin.Symbol)</span>
+            </li>
+            </a>
+        }
+    </ul>
 </div>

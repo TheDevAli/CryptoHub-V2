@@ -2,11 +2,11 @@
 @model CoinGecko.Entities.Response.Coins.CoinFullDataById
 
 @{
-    ViewData["Title"] = "CoinData";
+    ViewData["Title"] = Model.Name;
 }
 
 <div class="jumbotron text-center">
-    <h1 class="display-4">@Html.DisplayName(Model.Name) (@Html.DisplayName(Model.Symbol.ToUpper()))</h1>
+    <h1 class="display-4"><img class="rounded-circle" src="@Model.Image.Small" /> @Html.DisplayName(Model.Name) (@Html.DisplayName(Model.Symbol.ToUpper()))</h1>
     <p class="lead">Last Updated: @Html.DisplayName(Model.MarketData.LastUpdated.Value.ToString("f", CultureInfo.CreateSpecificCulture("en-US"))) (GMT)</p>
     <hr />
 </div>
@@ -21,7 +21,15 @@
                             <i class="icon-pencil primary font-large-2 float-left"></i>
                         </div>
                         <div class="media-body text-right">
-                            <h3>@Html.DisplayFor(model => model.MarketCapRank)</h3>
+                            @if (Model.MarketCapRank != null)
+                            {
+                                <h3>@Html.DisplayFor(model => model.MarketCapRank)</h3>
+
+                            }
+                            else
+                            {
+                                <h3>N/A</h3>
+                            }
                             <span>Market Rank</span>
                         </div>
                     </div>
@@ -124,7 +132,7 @@
                             {
                                 <h3 class="text-success">@Html.DisplayFor(model => model.MarketData.PriceChangePercentage7D)</h3>
 
-                            }                            
+                            }
                             <span>7d %</span>
                         </div>
                     </div>

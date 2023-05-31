@@ -28,15 +28,3 @@ function backToTop() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
-
-/* not working
-//Search page asp-route-id dynamic
-let form = document.getElementById("filter-form");
-let value = document.getElementById("coin-filter-search").innerHTML;
-
-form.addEventListener("click", ev => {
-    ev.preventDefault();
-
-    let url = this.Attr("asp-route-id");
-    url = url.replace("dummy", value);
-}) */
