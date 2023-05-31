@@ -23,7 +23,7 @@ namespace CryptoHub
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddHttpClient<CoinService>(c => c.BaseAddress = new System.Uri("https://api.coingecko.com/api/v3"));
+            builder.Services.AddHttpClient<CryptoService>(c => c.BaseAddress = new System.Uri("https://api.coingecko.com/api/v3"));
             builder.Services.AddScoped(typeof(CoinGecko.Clients.CoinGeckoClient));
 
             var app = builder.Build();

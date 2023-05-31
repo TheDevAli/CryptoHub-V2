@@ -8,12 +8,12 @@ using CoinGecko.Interfaces;
 
 namespace CryptoHub.Services;
 
-public class CoinService
+public class CryptoService
 {
     private readonly HttpClient _api;
     private readonly CoinGeckoClient _client;
 
-    public CoinService(HttpClient api, CoinGeckoClient client)
+    public CryptoService(HttpClient api, CoinGeckoClient client)
     {
         _api = api;
         _client = client;

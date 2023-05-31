@@ -1,19 +1,19 @@
 ﻿@model IReadOnlyList<CoinGecko.Entities.Response.Coins.CoinList>;
 
 @{
-    ViewData["Title"] = "Search";
+    ViewData["Title"] = "Crypto Search";
 }
 
 <div class="jumbotron text-center">
-    <h1 class="display-4">Coin Search</h1>
-    <p class="lead">Search for details of cryptocurrency.</p>
+    <h1 class="display-4">Crypto Search</h1>
+    <p class="lead">Search for details of any cryptocurrency.</p>
     <hr />
 </div>
 
 <div class="container d-flex justify-content-center mt-2">
     <form asp-controller="Coin" asp-action="Search" method="get">
         <div class="container d-flex justify-content-center flex-column gap-2">
-            <input type="text" id="search-input" name="SearchString" placeholder="Search for a coin..." />
+            <input type="text" id="search-input" name="SearchString" placeholder="search for crypto..." />
             <input type="submit" role="button" class="btn btn-dark" value="Search" />
         </div>
     </form>
@@ -23,7 +23,7 @@
     <ul class="list-group">
         @foreach (var coin in Model)
         {
-            <a class="text-dark" style="text-decoration: none;" asp-controller="Coin" asp-action="CoinData" asp-route-id="@coin.Id">
+            <a class="text-dark" style="text-decoration: none;" asp-controller="Crypto" asp-action="CryptoData" asp-route-id="@coin.Id">
             <li class="list-group-item list-coin">
                     @Html.DisplayName(coin.Name)
                 <span class="badge bg-dark rounded-pill">(@coin.Symbol)</span>

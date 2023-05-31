@@ -10,10 +10,10 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CryptoHub.Controllers;
 
-public class CoinController : Controller
+public class CryptoController : Controller
 {
-    private readonly CoinService _service;
-    public CoinController(CoinService service)
+    private readonly CryptoService _service;
+    public CryptoController(CryptoService service)
     {
         _service = service;
     }
@@ -35,7 +35,7 @@ public class CoinController : Controller
         return View(res);
     }
 
-    // Trending coins /Coin/Trending
+    // Trending coins /Crypto/Trending
     public async Task<IActionResult> Trending()
     {
         var res = await _service.GetTrendingCoinsListAsync();
@@ -43,7 +43,7 @@ public class CoinController : Controller
         return View("TrendingCoins", res);
     }
 
-    // Live Market --- /Coin/Market
+    // Live Market --- /Crypto/Market
     public async Task<IActionResult> Market()
     {
         var res = await _service.GetMarketDataAsync();
@@ -51,7 +51,7 @@ public class CoinController : Controller
         return View("Market", res);
     }
 
-    // Search coin /Coin/Search
+    // Search coin /Crypto/Search
     public async Task<IActionResult> Search(string? searchString)
     {
         var res = await _service.GetCoinListAsync();
@@ -66,8 +66,8 @@ public class CoinController : Controller
         return View("Search", res);
     }
 
-    // Search Coin /Coin/Coindata
-    public async Task<IActionResult> CoinData(string id)
+    // Search Coin /Crypto/Cryptodata
+    public async Task<IActionResult> CryptoData(string id)
     {
         if (string.IsNullOrWhiteSpace(id))
         {
@@ -81,7 +81,7 @@ public class CoinController : Controller
             return NotFound();
         }
 
-        return View("CoinData", res);
+        return View("CryptoData", res);
         
     }
 
