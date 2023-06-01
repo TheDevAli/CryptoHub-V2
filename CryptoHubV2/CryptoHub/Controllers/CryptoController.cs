@@ -51,7 +51,7 @@ public class CryptoController : Controller
         return View("Market", res);
     }
 
-    // Search coin /Crypto/Search
+    // Search Crypto /Crypto/Search
     public async Task<IActionResult> Search(string? searchString)
     {
         var res = await _service.GetCoinListAsync();
@@ -66,7 +66,7 @@ public class CryptoController : Controller
         return View("Search", res);
     }
 
-    // Search Coin /Crypto/Cryptodata
+    // Search Crypto /Crypto/Cryptodata
     public async Task<IActionResult> CryptoData(string id)
     {
         if (string.IsNullOrWhiteSpace(id))

@@ -43,8 +43,8 @@ public class CryptoService
         return await cgClient.CoinsClient.GetCoinMarkets("usd");
     }
 
-    // Search for coin
-    public async Task<IReadOnlyList<CoinList>> GetCoinListAsync() // not using this yet but works 
+    // Search Crypto
+    public async Task<IReadOnlyList<CoinList>> GetCoinListAsync() 
     {
         return await _client.CoinsClient.GetCoinList();
     }
