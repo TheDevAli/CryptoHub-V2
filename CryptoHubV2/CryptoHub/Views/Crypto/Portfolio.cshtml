@@ -1,0 +1,46 @@
+﻿@model CryptoHub.Models.Portfolio
+
+@{
+    ViewData["Title"] = "Portfolio";
+}
+
+<div class="jumbotron text-center">
+    <h1 class="display-4">Personal Portfolio</h1>
+    <p class="lead">Simluate your current, ideal or proposed portfolio and analyze its worth.</p>
+    <hr />
+</div>
+
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Cryptocurrencies
+    </button>
+    <ul class="dropdown-menu">
+        @foreach (var crypto in Model.CryptoList)
+        {
+            <form method="post" asp-page-handler="GetCoinPriceByIdAsync(@crypto.Id)">
+            <li><button class="dropdown-item" type="button">@Html.DisplayName(crypto.Name) (@Html.DisplayName(crypto.Symbol).ToUpper())</button></li>
+            </form>
+        }
+    </ul>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Cryptocurrency</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Value ($)</th>
+      <th scope="col">Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+      <!-- razor stuff here for getting coin price.-->
+        
+        <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>xxx</td>
+    </tr>
+  </tbody>
+</table>

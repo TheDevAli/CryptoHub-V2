@@ -81,8 +81,14 @@ public class CryptoController : Controller
             return NotFound();
         }
 
-        return View("CryptoData", res);
-        
+        return View("CryptoData", res);    
+    }
+
+    
+    public async Task<IActionResult> Portfolio()
+    {
+        var res = await _service.PortfolioGeneratorAsync();
+        return View("Portfolio", res);
     }
 
 }

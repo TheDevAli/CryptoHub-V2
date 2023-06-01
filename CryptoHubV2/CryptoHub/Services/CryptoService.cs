@@ -53,4 +53,20 @@ public class CryptoService
     {
         return await _client.CoinsClient.GetAllCoinDataWithId(id);
     }
+
+    
+    public async Task<Portfolio> PortfolioGeneratorAsync()
+    {
+        var model = new Portfolio();
+        model.CryptoList = await GetCoinListAsync();
+        return model;
+    }
+
+    /*public async Task<Portfolio> PortfolioCryptoPrice(string id)
+    {
+        var model = new Portfolio();
+        model.CryptoPrice = await GetCoinPriceByIdAsync(id, "usd");
+        return model;
+    }
+    */
 }

@@ -10,6 +10,6 @@ namespace CryptoHub.Data
             : base(options)
         {
         }
-        public DbSet<CryptoHub.Models.Coin> Coin { get; set; } = default!;
+        public DbSet<CryptoHub.Models.Portfolio> Coin { get; set; } = default!;
     }
 }
